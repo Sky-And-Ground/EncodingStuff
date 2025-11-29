@@ -1,2 +1,2 @@
 # EncodingStuff
-##### header only library for encoding converting on windows platform, like unicode to utf8. This library provides an extra C version.
+##### a library for unicode, ascii, utf8 conversions, only for windows platform. This library provides an extra C version.
