@@ -16,12 +16,7 @@ namespace win_encoding {
         }
 
         auto buf = std::make_unique<char[]>(len);
-
-        len = WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, buf.get(), len, nullptr, nullptr);
-        if (len == 0) {
-            ec.assign(GetLastError(), std::system_category());
-            return "";
-        }
+        WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, buf.get(), len, nullptr, nullptr);
 
         ec.clear();
         return std::string(buf.get());
@@ -35,12 +30,7 @@ namespace win_encoding {
         }
         
         auto buf = std::make_unique<wchar_t[]>(len);
-        
-        len = MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, buf.get(), len);
-        if (len == 0) {
-            ec.assign(GetLastError(), std::system_category());
-            return L"";
-        }
+        MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, buf.get(), len);
 
         ec.clear();
         return std::wstring(buf.get());
@@ -54,12 +44,7 @@ namespace win_encoding {
         }
 
         auto buf = std::make_unique<wchar_t[]>(len);
-
-        len = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, buf.get(), len);
-        if (len == 0) {
-            ec.assign(GetLastError(), std::system_category());
-            return L"";
-        }
+        MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, buf.get(), len);
 
         ec.clear();
         return std::wstring(buf.get());
@@ -73,12 +58,7 @@ namespace win_encoding {
         }
 
         auto buf = std::make_unique<char[]>(len);
-
-        len = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, buf.get(), len, nullptr, nullptr);
-        if (len == 0) {
-            ec.assign(GetLastError(), std::system_category());
-            return "";
-        }
+        WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, buf.get(), len, nullptr, nullptr);
 
         ec.clear();
         return std::string(buf.get());
